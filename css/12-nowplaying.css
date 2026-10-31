@@ -1,0 +1,87 @@
+/* ==========================================================================
+   NOW PLAYING - penanda lagu di pojok kiri bawah menu utama
+   ========================================================================== */
+.nowplaying {
+  position: absolute;
+  left: 2.25rem;
+  bottom: 1.5rem;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 26rem;
+  padding: 0.35rem 0.6rem 0.35rem 0;
+  background: none;
+  border: none;
+  color: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  outline: none;
+}
+
+body.experience-started .nowplaying { opacity: 1; transition-delay: 0.9s; }
+
+body[class*="-screen-active"] .nowplaying {
+  opacity: 0;
+  pointer-events: none;
+  transition-delay: 0s;
+}
+
+.np-eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 1.5rem;
+  transform: skewX(-14deg);
+}
+
+.np-eq i {
+  display: block;
+  width: 5px;
+  height: 25%;
+  background: var(--color-button-1);
+  box-shadow: 0 0 0 1px rgba(3, 31, 100, 0.8);
+}
+
+.nowplaying.is-playing .np-eq i { animation: npBounce 0.9s ease-in-out infinite; }
+.nowplaying.is-playing .np-eq i:nth-child(2) { animation-delay: -0.25s; }
+.nowplaying.is-playing .np-eq i:nth-child(3) { animation-delay: -0.55s; }
+.nowplaying.is-playing .np-eq i:nth-child(4) { animation-delay: -0.8s; }
+.nowplaying.is-off .np-eq i { background: rgba(255, 255, 255, 0.4); }
+
+@keyframes npBounce {
+  0%, 100% { height: 22%; }
+  50% { height: 100%; }
+}
+
+.np-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.np-title,
+.np-sub {
+  font-family: var(--font-new-rodin);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow:
+    0 1px 0 var(--color-border), 0 -1px 0 var(--color-border),
+    1px 0 0 var(--color-border), -1px 0 0 var(--color-border),
+    0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.np-title { font-size: 1.1rem; font-weight: 800; }
+.np-sub { font-size: 0.82rem; color: #b9efff; }
+
+.nowplaying:hover .np-title,
+.nowplaying:focus-visible .np-title { text-decoration: underline; text-underline-offset: 0.2em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nowplaying.is-playing .np-eq i { animation: none; height: 60%; }
+}

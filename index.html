@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panji Setiawan | Portfolio</title>
+  <meta name="description" content="Portfolio of Panji Setiawan, a frontend design, styled after the Persona 3 Reload pause menu.">
+  <meta name="theme-color" content="#001233">
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+
+  <!-- CSS dipisah per bagian. Urutan penting. -->
+  <link rel="stylesheet" href="css/01-base.css">
+  <link rel="stylesheet" href="css/02-stage.css">
+  <link rel="stylesheet" href="css/03-loading.css">
+  <link rel="stylesheet" href="css/04-menu.css">
+  <link rel="stylesheet" href="css/05-screen-shell.css">
+  <link rel="stylesheet" href="css/06-skills.css">
+  <link rel="stylesheet" href="css/07-about.css">
+  <link rel="stylesheet" href="css/08-contact.css">
+  <link rel="stylesheet" href="css/09-vignette.css">
+  <link rel="stylesheet" href="css/10-gate.css">
+  <link rel="stylesheet" href="css/11-panels.css">
+  <link rel="stylesheet" href="css/12-nowplaying.css">
+</head>
+<body>
+  <!-- Peringatan layar kecil -->
+  <div class="mobile-warning">
+    <p>This portfolio is built for a computer screen.</p>
+    <p>Open it on a laptop or desktop (1024 px wide or more).</p>
+  </div>
+
+  <!-- Layar loading, lalu layar pilihan suara -->
+  <div id="loading-screen" class="p3r-loading-screen" role="progressbar" aria-label="Loading" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <!-- Background halaman awal (loading + gate): assets/video/awal-bg.mp4 -->
+    <video id="awal-bg-video" class="awal-bg-video" src="assets/video/awal-bg.mp4" autoplay loop muted playsinline preload="auto" aria-hidden="true"></video>
+    <div class="awal-bg-shade" aria-hidden="true"></div>
+
+    <div class="loading-hud-bottom">
+      <div class="loading-text-row">
+        <h2 class="loading-title">NOW LOADING<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></h2>
+      </div>
+      <div class="loading-bar-wrap">
+        <div class="loading-track"><div id="loading-bar" class="loading-fill"></div></div>
+        <div id="loading-percent" class="loading-percent">0%</div>
+      </div>
+    </div>
+
+    <div id="start-gate" class="p3r-gate" hidden>
+      <!-- Kiri bawah: nama dan pilihan suara -->
+      <div class="gate-left">
+        <div class="gate-title">
+          <h1 class="gate-name" data-profile="name"></h1>
+          <p class="gate-tagline">Portfolio, shaped like the Persona 3 Reload pause menu</p>
+        </div>
+
+        <ul class="gate-options" aria-label="Sound settings">
+          <li><div id="gate-selector" class="gate-selector" aria-hidden="true"></div></li>
+          <li class="gate-row" data-setting="music"><span class="gate-label">Music</span><span class="gate-state">ON</span></li>
+          <li class="gate-row" data-setting="sfx"><span class="gate-label">Sound effects</span><span class="gate-state">ON</span></li>
+        </ul>
+      </div>
+
+      <!-- Kanan bawah: tombol masuk dan petunjuk tombol -->
+      <div class="gate-right">
+        <button id="gate-enter" class="gate-enter" type="button">
+          <span class="gate-enter-text">ENTER</span>
+          <svg width="46" height="46" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 11h10.2l-4.6-4.6L11 5l7 7-7 7-1.4-1.4 4.6-4.6H4z"/></svg>
+        </button>
+        <p class="gate-hint">
+          <span>Up / Down to choose</span>
+          <span>Left / Right to switch</span>
+          <span>Enter to start</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu utama -->
+  <main class="p3r-main">
+    <div class="p3r-global-vignette" aria-hidden="true"></div>
+
+    <video id="background-video-intro" class="background-video bg-video-intro" src="assets/video/bg-intro.mp4" muted playsinline preload="metadata"></video>
+    <video id="background-video-loop" class="background-video bg-video-loop" src="assets/video/bg-loop.mp4" loop muted playsinline preload="none"></video>
+
+    <div id="side-number" class="side-number" aria-hidden="true"><span>01</span></div>
+
+    <div id="menu-profile-header" class="menu-profile-header" aria-hidden="true">
+      <div class="profile-name-text" data-profile="name"></div>
+      <div class="profile-accent-line"></div>
+    </div>
+
+    <div id="menu-column" class="menu-column">
+      <div id="options-list" class="options-list"></div>
+    </div>
+
+    <button id="nowplaying" class="nowplaying" type="button" aria-label="Toggle music">
+      <span class="np-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="np-text"><span class="np-title">Music</span><span class="np-sub"></span></span>
+    </button>
+
+    <div class="hud-controls">
+      <div class="hud-stack">
+        <p id="menu-description" class="menu-description"></p>
+        <div class="buttons-row">
+          <div class="control-item"><div class="control-key">ENTER</div><span class="control-text">Confirm</span></div>
+          <div class="control-item"><div class="control-key">M</div><span class="control-text">Music</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Halaman-halaman -->
+  <section id="project-page" class="p3r-slink-screen" role="region" aria-label="Projects Social Link Screen" aria-hidden="true">
+    <!-- Project Screen Animated Video Background (Makoto Wallpaper) -->
+    <div class="slink-video-container" aria-hidden="true">
+      <video id="slink-bg-video" class="slink-bg-video" loop muted playsinline preload="none">
+        <source src="assets/video/skills-bg.mp4" type="video/mp4">
+      </video>
+      <div class="slink-video-overlay" aria-hidden="true"></div>
+    </div>
+
+    <!-- Main Viewport Layer matching user screenshot -->
+    <div class="slink-viewport">
+      <!-- Left Column: PROJECT Header + Cards Stack -->
+      <div class="slink-left-column">
+        <!-- Profile Sub-header matching Atlus P3R Layout -->
+        <div class="slink-profile-header" aria-hidden="true">
+          <div class="slink-profile-name" data-profile="name"></div>
+        </div>
+
+        <!-- Persona 3 Reload Shattered Geometric Header Banner -->
+        <div class="p3r-geometric-header" id="slink-project-div">
+          <!-- Fractured Background Sky-Blue Band (Extending from left) -->
+          <div class="p3r-shard-back-band" aria-hidden="true"></div>
+          <!-- Fractured Cyan Peak Shard (Top-right acute blade) -->
+          <div class="p3r-shard-cyan-peak" aria-hidden="true"></div>
+          <!-- Fractured Right Edge Accent Blade -->
+          <div class="p3r-shard-right-cyan" aria-hidden="true"></div>
+          <!-- Main Dark Midnight Blue Razor-Cut Banner -->
+          <div class="p3r-header-slash-main" aria-hidden="true"></div>
+          <!-- Floating Broken Glass Triangular Shards -->
+          <div class="p3r-shard-float p3r-shard-float-1" aria-hidden="true"></div>
+          <div class="p3r-shard-float p3r-shard-float-2" aria-hidden="true"></div>
+          <!-- Crisp Pure White Title -->
+          <h1 class="p3r-banner-title" id="slink-project-text">PROJECT</h1>
+        </div>
+
+        <!-- Vertical Angled Cards Stack -->
+        <div id="slink-cards-container" class="slink-cards-container" role="tablist" aria-label="Project List">
+          <!-- Dynamically populated by main.js with exact P3R card design -->
+        </div>
+      </div>
+
+      <aside id="project-detail" class="p3r-detail" aria-live="polite"></aside>
+
+      <!-- Bottom Right HUD -->
+      <div class="slink-bottom-hud">
+        <div class="buttons-row">
+          <button id="slink-confirm-btn" class="control-item slink-hud-btn" aria-label="Confirm Selection">
+            <div class="control-key">ENTER</div>
+            <span class="control-text">Confirm</span>
+          </button>
+          <button id="slink-back-btn" class="control-item slink-hud-btn" aria-label="Back to Main Menu">
+            <div class="control-key">ESC</div>
+            <span class="control-text">Back</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skill-page" class="p3r-slink-screen p3r-skill-screen" role="region" aria-label="Skills Stats Screen" aria-hidden="true">
+    <!-- Video Background (Makoto Wallpaper) -->
+    <div class="slink-video-container" aria-hidden="true">
+      <video id="skill-bg-video" class="slink-bg-video" loop muted playsinline preload="none">
+        <source src="assets/video/makoto-wallpaper.mp4" type="video/mp4">
+      </video>
+      <div class="slink-video-overlay" aria-hidden="true"></div>
+    </div>
+
+    <!-- Main Viewport Layer -->
+    <div class="slink-viewport p3r-skill-viewport">
+      <!-- Left Column: Profile Name + SKILLS Header + Category Tabs + Skill Stats Grid -->
+      <div class="slink-left-column p3r-skill-left-column">
+        <!-- Profile Sub-header -->
+        <div class="slink-profile-header" aria-hidden="true">
+          <div class="slink-profile-name" data-profile="name"></div>
+        </div>
+
+        <!-- Persona 3 Reload Shattered Geometric Header Banner for SKILLS -->
+        <div class="p3r-geometric-header" id="skill-header-div">
+          <!-- Fractured Background Sky-Blue Band (Solid Light-Blue Shadow) -->
+          <div class="p3r-shard-back-band" aria-hidden="true"></div>
+          <!-- Main Dark Midnight Blue Razor-Cut Banner -->
+          <div class="p3r-header-slash-main" aria-hidden="true"></div>
+          <!-- Crisp Pure White Title -->
+          <h1 class="p3r-banner-title" id="skill-header-text">SKILLS</h1>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="p3r-skill-tabs" id="skill-tabs-nav" role="tablist" aria-label="Skill Categories">
+          <!-- Dynamically populated by main.js: ALL, FRONTEND, BACKEND, AI & ML, CREATIVE -->
+        </div>
+
+        <!-- Skills Stats Container -->
+        <div id="p3r-skills-container" class="p3r-skills-container" role="region" aria-label="Skill Stats List">
+          <!-- Dynamically populated by main.js with stats skill rows and animated meters -->
+        </div>
+      </div>
+
+      <!-- Bottom Right HUD: Controls matching Menu Utama & Project style -->
+      <div class="slink-bottom-hud">
+        <div class="buttons-row">
+          <button id="skill-tab-prev-btn" class="control-item slink-hud-btn" aria-label="Previous Category">
+            <div class="control-key">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+            </div>
+            <span class="control-text">Prev</span>
+          </button>
+          <button id="skill-tab-next-btn" class="control-item slink-hud-btn" aria-label="Next Category">
+            <div class="control-key">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+            <span class="control-text">Next</span>
+          </button>
+          <button id="skill-back-btn" class="control-item slink-hud-btn" aria-label="Close Skills Screen">
+            <div class="control-key">ESC</div>
+            <span class="control-text">Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about-page" class="p3r-slink-screen p3r-about-screen" role="region" aria-label="About Screen" aria-hidden="true">
+    <!-- Video Background (Makoto Wallpaper) -->
+    <div class="slink-video-container" aria-hidden="true">
+      <video id="about-bg-video" class="slink-bg-video" loop muted playsinline preload="none">
+        <source src="assets/video/about-bg.mp4" type="video/mp4">
+      </video>
+      <div class="slink-video-overlay" aria-hidden="true"></div>
+    </div>
+
+    <!-- Main Viewport Layer -->
+    <div class="slink-viewport p3r-about-viewport">
+      <!-- Left Column: Profile Name + ABOUT Header + Left-Docked Info Card -->
+      <div class="slink-left-column p3r-about-left-column">
+        <!-- Profile Sub-header -->
+        <div class="slink-profile-header" aria-hidden="true">
+          <div class="slink-profile-name" data-profile="name"></div>
+        </div>
+
+        <!-- Persona 3 Reload Shattered Geometric Header Banner for ABOUT -->
+        <div class="p3r-geometric-header" id="about-header-div">
+          <!-- Fractured Background Sky-Blue Band (Solid Light-Blue Shadow) -->
+          <div class="p3r-shard-back-band" aria-hidden="true"></div>
+          <!-- Main Dark Midnight Blue Razor-Cut Banner -->
+          <div class="p3r-header-slash-main" aria-hidden="true"></div>
+          <!-- Crisp Pure White Title -->
+          <h1 class="p3r-banner-title" id="about-header-text">ABOUT</h1>
+        </div>
+
+        <!-- Left-Docked About Card (NOT full div, docked cleanly on the left side) -->
+        <div class="p3r-about-card" role="region" aria-label="About Profile Card">
+          <div class="p3r-about-card-inner">
+            
+            <!-- Top Section: User Photo + Identity -->
+            <div class="p3r-about-top-row">
+              <!-- User Profile Photo -->
+              <div class="p3r-photo-box" aria-label="Profile Photo">
+                <img data-profile="photo" src="assets/images/profile.jpg" alt="" class="p3r-photo-img" />
+              </div>
+
+              <!-- Identity Details (Clean & Minimalist) -->
+              <div class="p3r-about-identity">
+                <h2 class="p3r-about-name" data-profile="name"></h2>
+                <div class="p3r-about-title" data-profile="role"></div>
+              </div>
+            </div>
+
+            <!-- Bio Explanations in English (Frontend Design only, Persona 3 Reload inspired, zero dashes) -->
+            <div class="p3r-about-bio" data-profile="bio"></div>
+
+            <!-- Inspiring Quote & Author (No dashes) -->
+            <div class="p3r-about-quote">
+              <div class="p3r-quote-mark" aria-hidden="true">“</div>
+              <div class="p3r-quote-content">
+                <blockquote class="p3r-quote-text" data-profile="quote-text"></blockquote>
+                <cite class="p3r-quote-author" data-profile="quote-author"></cite>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Right HUD: Controls matching Menu Utama style -->
+      <div class="slink-bottom-hud">
+        <div class="buttons-row">
+          <button id="about-back-btn" class="control-item slink-hud-btn" aria-label="Close About Screen">
+            <div class="control-key">ESC</div>
+            <span class="control-text">Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resume-page" class="p3r-slink-screen p3r-resume-screen" role="region" aria-label="Resume Timeline Screen" aria-hidden="true">
+    <div class="slink-video-container" aria-hidden="true">
+      <video id="resume-bg-video" class="slink-bg-video" loop muted playsinline preload="none">
+        <source src="assets/video/resume-bg.mp4" type="video/mp4">
+      </video>
+      <div class="slink-video-overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="slink-viewport">
+      <div class="slink-left-column">
+        <div class="slink-profile-header" aria-hidden="true">
+          <div class="slink-profile-name" data-profile="name"></div>
+        </div>
+
+        <div class="p3r-geometric-header" id="resume-header-div">
+          <div class="p3r-shard-back-band" aria-hidden="true"></div>
+          <div class="p3r-header-slash-main" aria-hidden="true"></div>
+          <h1 class="p3r-banner-title">RESUME</h1>
+        </div>
+
+        <div id="resume-cards-container" class="slink-cards-container" role="tablist" aria-label="Timeline"></div>
+      </div>
+
+      <aside id="resume-detail" class="p3r-detail" aria-live="polite"></aside>
+
+      <div class="slink-bottom-hud">
+        <div class="buttons-row">
+          <div class="control-item">
+            <div class="control-key"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></div>
+            <span class="control-text">Select</span>
+          </div>
+          <button id="resume-back-btn" class="control-item slink-hud-btn" aria-label="Close Resume Screen">
+            <div class="control-key">ESC</div>
+            <span class="control-text">Back</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact-page" class="p3r-slink-screen p3r-contact-screen" role="region" aria-label="Contact Mail Screen" aria-hidden="true">
+    <!-- Video Background (Atmospheric Loop) -->
+    <div class="slink-video-container" aria-hidden="true">
+      <video id="contact-bg-video" class="slink-bg-video" loop muted playsinline preload="none">
+        <source src="assets/video/contact-bg.mp4" type="video/mp4">
+      </video>
+      <div class="slink-video-overlay p3r-contact-overlay" aria-hidden="true"></div>
+    </div>
+
+    <!-- Main Viewport Layer -->
+    <div class="slink-viewport p3r-contact-viewport">
+      
+      <!-- Slanted Message Pad Container (Enlarged to match reference proportions) -->
+      <div class="p3r-mail-phone-wrap">
+
+        <!-- SVG Phone Chassis Background: Distinct White Linear Frame & Extended Black Body -->
+        <svg class="p3r-mail-chassis-svg" viewBox="0 0 880 860" preserveAspectRatio="none" aria-hidden="true">
+          <!-- Div Hitam: Badan ponsel tanpa gundukan, melebar ke kanan atas dan kanan bawah -->
+          <polygon class="p3r-mail-black-body" 
+                   points="10,28 875,56 875,836 10,858" 
+                   fill="#070a12" />
+
+          <!-- Garis Linear Putih: Bingkai Putih Berbeda Kemiringan dan Offset, Tanpa Glowing -->
+          <polygon class="p3r-mail-white-frame" 
+                   points="22,50 832,96 828,806 18,838" 
+                   fill="none" 
+                   stroke="#ffffff" 
+                   stroke-width="4.5" 
+                   stroke-linejoin="round" />
+        </svg>
+        
+        <!-- Phone Inner Content Container -->
+        <div class="p3r-mail-phone-card">
+          
+          <!-- Top Watermark & Header (Tanpa Today Message, teks MAIL besar otentik) -->
+          <div class="p3r-mail-header-row">
+            <div class="p3r-mail-watermark" aria-hidden="true">MAIL</div>
+          </div>
+
+          <!-- Messages / Contact Items List (Tanpa Tanda Seru) -->
+          <div id="contact-list" class="p3r-mail-list-container" role="list" aria-label="Contact Channels"></div>
+
+        </div>
+
+      </div>
+
+      <!-- Bottom Left HUD: ESC Back button placed in bottom-left corner per user request -->
+      <div class="p3r-contact-bottom-hud">
+        <div class="buttons-row">
+          <button id="contact-back-btn" class="control-item slink-hud-btn" aria-label="Close Contact Screen">
+            <div class="control-key">ESC</div>
+            <span class="control-text">Close</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="system-page" class="p3r-slink-screen p3r-system-screen" role="region" aria-label="System Settings Screen" aria-hidden="true">
+    <div class="slink-video-container" aria-hidden="true">
+      <video id="system-bg-video" class="slink-bg-video" loop muted playsinline preload="none">
+        <source src="assets/video/system-bg.mp4" type="video/mp4">
+      </video>
+      <div class="slink-video-overlay" aria-hidden="true"></div>
+    </div>
+
+    <div class="slink-viewport">
+      <div class="slink-left-column">
+        <div class="slink-profile-header" aria-hidden="true">
+          <div class="slink-profile-name" data-profile="name"></div>
+        </div>
+
+        <div class="p3r-geometric-header" id="system-header-div">
+          <div class="p3r-shard-back-band" aria-hidden="true"></div>
+          <div class="p3r-header-slash-main" aria-hidden="true"></div>
+          <h1 class="p3r-banner-title">SYSTEM</h1>
+        </div>
+
+        <div id="system-cards-container" class="slink-cards-container sys-cards" role="tablist" aria-label="Music and sound settings"></div>
+      </div>
+
+      <aside id="system-detail" class="p3r-detail" aria-live="polite"></aside>
+
+      <div class="slink-bottom-hud">
+        <div class="buttons-row">
+          <button id="system-confirm-btn" class="control-item slink-hud-btn" aria-label="Confirm Selection">
+            <div class="control-key">ENTER</div>
+            <span class="control-text">Select</span>
+          </button>
+          <button id="system-back-btn" class="control-item slink-hud-btn" aria-label="Close System Screen">
+            <div class="control-key">ESC</div>
+            <span class="control-text">Back</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript dipisah per modul. Urutan penting: data, core, halaman, main -->
+  <script src="js/data/profile.js"></script>
+  <script src="js/data/menu.js"></script>
+  <script src="js/data/projects.js"></script>
+  <script src="js/data/skills.js"></script>
+  <script src="js/data/resume.js"></script>
+  <script src="js/data/contact.js"></script>
+  <script src="js/data/music.js"></script>
+
+  <script src="js/core/settings.js"></script>
+  <script src="js/core/audio.js"></script>
+  <script src="js/core/music.js"></script>
+  <script src="js/core/background.js"></script>
+  <script src="js/core/transition.js"></script>
+  <script src="js/core/pages.js"></script>
+  <script src="js/core/detail.js"></script>
+  <script src="js/core/boot.js"></script>
+
+  <script src="js/pages/project.js"></script>
+  <script src="js/pages/skills.js"></script>
+  <script src="js/pages/about.js"></script>
+  <script src="js/pages/resume.js"></script>
+  <script src="js/pages/contact.js"></script>
+  <script src="js/pages/system.js"></script>
+
+  <script src="js/ui-menu.js"></script>
+  <script src="js/ui-nowplaying.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

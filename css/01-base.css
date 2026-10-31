@@ -1,0 +1,157 @@
+/* ==========================================================================
+   PERSONA 3 RELOAD - PAUSE MENU & PORTFOLIO
+   Pure Vanilla HTML5 / CSS3 / ES6
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   Font Declarations
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Rodin Pro";
+  src: url("../fonts/Rodin Pro EB.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rodin Pro Medium";
+  src: url("../fonts/Rodin Pro DB.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rodin Pro Bold";
+  src: url("../fonts/Rodin Pro UB.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NewRodin Pro";
+  src: url("../fonts/NewRodin Pro DB.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NewRodin Pro UB";
+  src: url("../fonts/NewRodin Pro UB.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Skip Std B";
+  src: url("../fonts/Skip Std B.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   Design Tokens & CSS Variables
+   -------------------------------------------------------------------------- */
+:root {
+  --color-fg: #ffffff;
+  --color-bg: #015fcc;
+  --color-bg-dark: #031f64;
+  --color-red: #ff0000;
+  --color-muted: rgba(255, 255, 255, 0.4);
+  --color-pink: #fd77d9;
+
+  --color-button-1: #16cffb;
+  --color-button-2: #7de6fd;
+  --color-button-3: #77fefc;
+
+  --color-border: #5d6a88;
+
+  --font-rodin: "Rodin Pro Bold", "Rodin Pro", sans-serif;
+  --font-rodin-medium: "Rodin Pro Medium", sans-serif;
+  --font-new-rodin: "NewRodin Pro", sans-serif;
+  --font-new-rodin-ub: "NewRodin Pro UB", "NewRodin Pro", sans-serif;
+  --font-skip: "Skip Std B", sans-serif;
+  --font-body: "NewRodin Pro", "Rodin Pro Medium", sans-serif;
+
+  --text-shadow-under: 0 1px 6px rgba(0, 0, 0, 0.5), 0 -1px 6px rgba(0, 0, 0, 0.5),
+    1px 0 6px rgba(0, 0, 0, 0.5), -1px 0 6px rgba(0, 0, 0, 0.5);
+  --shadow-under: 0 1px 6px rgba(0, 0, 0, 0.5), 0 -1px 6px rgba(0, 0, 0, 0.5),
+    1px 0 6px rgba(0, 0, 0, 0.5), -1px 0 6px rgba(0, 0, 0, 0.5);
+  --text-shadow-border:
+    0 2px 0 var(--color-border),
+    0 -2px 0 var(--color-border),
+    2px 0 0 var(--color-border),
+    -2px 0 0 var(--color-border),
+    -2px -2px 0 var(--color-border),
+    2px -2px 0 var(--color-border),
+    2px 2px 0 var(--color-border),
+    -2px 2px 0 var(--color-border),
+    0 1px 6px rgba(0, 0, 0, 0.5),
+    0 -1px 6px rgba(0, 0, 0, 0.5),
+    1px 0 6px rgba(0, 0, 0, 0.5),
+    -1px 0 6px rgba(0, 0, 0, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   Reset & Base Styles
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #001233;
+  color: var(--color-fg);
+  font-family: var(--font-rodin);
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Disable main menu interaction when project S.Link screen is active */
+body.project-screen-active #menu-column,
+body.project-screen-active .hud-controls,
+body.project-screen-active .controls-guide,
+body.project-screen-active .side-number {
+  pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Small Screen Warning (identical to original)
+   -------------------------------------------------------------------------- */
+.mobile-warning {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-bg);
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  font-family: var(--font-skip);
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 1023px) {
+  .mobile-warning {
+    display: flex;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Main Screen Container
+   -------------------------------------------------------------------------- */

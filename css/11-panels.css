@@ -1,0 +1,216 @@
+/* ==========================================================================
+   PANELS - panel keterangan, halaman RESUME & SYSTEM, deskripsi menu,
+   dan penyesuaian untuk 6 opsi menu
+   ========================================================================== */
+
+/* ---- Menu: 6 opsi. Kolom menu diperkecil sesuai tinggi layar supaya tidak menabrak nama / deskripsi ---- */
+.menu-column {
+  top: 55%;
+  transform: translateY(-50%) scale(0.95);
+  transform-origin: left center;
+}
+@media (max-height: 940px) { .menu-column { transform: translateY(-50%) scale(0.8); } }
+@media (max-height: 860px) { .menu-column { transform: translateY(-50%) scale(0.74); } }
+@media (max-height: 780px) { .menu-column { transform: translateY(-50%) scale(0.68); } }
+@media (max-height: 700px) { .menu-column { transform: translateY(-50%) scale(0.6); } }
+
+/* ---- Menu: animasi masuk bertahap untuk opsi 5 dan 6 ---- */
+.menu-column.menu-entered .option-item:nth-of-type(5) {
+  animation: p3rMenuEntrance 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.38s forwards;
+}
+.menu-column.menu-entered .option-item:nth-of-type(6) {
+  animation: p3rMenuEntrance 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.44s forwards;
+}
+
+/* Menu utama tidak boleh bisa diklik saat halaman lain terbuka */
+body[class*="-screen-active"] #menu-column,
+body[class*="-screen-active"] .hud-controls,
+body[class*="-screen-active"] .side-number {
+  pointer-events: none !important;
+}
+
+/* ---- HUD kanan bawah menu: deskripsi opsi + tombol ---- */
+.hud-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.55rem;
+}
+
+.menu-description {
+  font-family: var(--font-new-rodin);
+  font-style: italic;
+  font-size: clamp(1.35rem, 1.9vw, 1.9rem);
+  line-height: 1.2;
+  color: #ffffff;
+  text-align: right;
+  text-shadow: var(--text-shadow-under);
+  min-height: 1.2em;
+}
+
+/* ---- Panel keterangan (PROJECT / RESUME / SYSTEM) ---- */
+.p3r-detail {
+  position: absolute;
+  right: 4.5vw;
+  bottom: clamp(4.5rem, 14vh, 7.5rem);
+  width: clamp(340px, 31vw, 500px);
+  z-index: 12;
+  pointer-events: none;
+}
+
+.detail-plate {
+  position: relative;
+  padding: 1.35rem 2.3rem 1.55rem 2.7rem;
+  background: rgba(2, 12, 40, 0.93);
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+}
+
+/* garis cyan mengikuti sisi kiri yang miring */
+.detail-plate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-button-1);
+  clip-path: polygon(7% 0, 8.4% 0, 1.4% 100%, 0 100%);
+  pointer-events: none;
+}
+
+.p3r-detail.swap .detail-plate {
+  animation: detailIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes detailIn {
+  from { opacity: 0; transform: translateX(36px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.detail-kicker {
+  font-family: var(--font-new-rodin);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-button-1);
+  margin-bottom: 0.15rem;
+}
+
+.detail-title {
+  font-family: var(--font-skip), sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: clamp(1.45rem, 1.9vw, 2rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin-bottom: 0.7rem;
+}
+
+.detail-text {
+  font-family: var(--font-new-rodin);
+  font-size: clamp(0.95rem, 1.05vw, 1.08rem);
+  line-height: 1.6;
+  color: #d6ecff;
+  max-width: 40ch;
+}
+
+.detail-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.detail-tags li {
+  font-family: var(--font-new-rodin);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #031f64;
+  background: var(--color-button-2);
+  padding: 0.12rem 0.8rem;
+  transform: skewX(-14deg);
+}
+
+.detail-link {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.05rem;
+}
+
+/* ---- RESUME: kartu lebih lebar karena subjudul lebih panjang ---- */
+.p3r-resume-screen .slink-card { width: clamp(560px, 48vw, 700px); }
+.p3r-resume-screen .slink-card.active { width: clamp(600px, 52vw, 750px) !important; }
+
+/* ---- SYSTEM: 11 baris, jadi kartu dibuat lebih ramping ---- */
+.sys-cards {
+  /* 11 baris harus selalu muat di layar: tinggi kartu mengikuti tinggi layar */
+  --card-height: clamp(28px, 5.4vh, 46px);
+  --card-gap: clamp(3px, 0.6vh, 7px);
+}
+
+/* Aturan ini mengalahkan @media (max-height: 720px) di 05-screen-shell.css yang memaksa tinggi 50px */
+.sys-cards .slink-card { height: var(--card-height); }
+
+.sys-cards .slink-card { width: clamp(470px, 38vw, 600px); }
+.sys-cards .slink-card.active { width: clamp(510px, 41vw, 650px) !important; }
+
+.sys-cards .card-numeral-box { width: clamp(52px, 3.8vw, 62px); }
+.sys-cards .card-numeral-text { font-size: clamp(0.95rem, 1.1vw, 1.2rem); }
+.sys-cards .card-main-body { flex-direction: row; align-items: center; gap: 1rem; padding: 0 2.6rem 0 1.5rem; }
+.sys-cards .card-main-body > .card-title-text { flex: 1 1 auto; min-width: 0; font-size: clamp(1rem, 1.15vw, 1.25rem); }
+.sys-cards .card-subtitle-text { display: none; }
+
+.sys-state {
+  flex: 0 0 auto;
+  min-width: 2.4rem;
+  text-align: right;
+  font-family: var(--font-rodin);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  transform: skewX(var(--card-unskew));
+  color: #ffffff;
+}
+
+.slink-card.active .sys-state { color: #061a35; }
+.sys-state.is-off { opacity: 0.55; }
+
+.sys-eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 1.1rem;
+}
+.sys-eq i {
+  display: block;
+  width: 4px;
+  height: 25%;
+  background: var(--color-button-1);
+  animation: npBounce 0.9s ease-in-out infinite;
+}
+.slink-card.active .sys-eq i { background: #e60024; }
+.sys-eq i:nth-child(2) { animation-delay: -0.25s; }
+.sys-eq i:nth-child(3) { animation-delay: -0.55s; }
+.sys-eq i:nth-child(4) { animation-delay: -0.8s; }
+
+/* Judul lagu yang sedang diputar dibuat lebih terang */
+.sys-cards .slink-card:has(.is-playing) .card-title-text { color: var(--color-button-3); }
+.sys-cards .slink-card.active:has(.is-playing) .card-title-text { color: #061a35 !important; }
+
+@media (max-height: 760px) {
+  .p3r-detail { bottom: clamp(3.8rem, 12vh, 6rem); }
+  .detail-text { line-height: 1.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p3r-detail.swap .detail-plate { animation: none; }
+  .sys-eq i { animation: none; height: 60%; }
+}
+
+/* Nama di kartu ABOUT memakai huruf tebal Rodin supaya tegas */
+.p3r-about-name {
+  font-family: var(--font-rodin), sans-serif;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}

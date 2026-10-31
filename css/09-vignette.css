@@ -1,0 +1,16 @@
+/* ==========================================================================
+   GLOBAL SIDE VIGNETTE (Hitam Pudar di Samping Samping Website di Setiap Page)
+   ========================================================================== */
+.p3r-global-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 22;
+  background: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.25) 3.5%, transparent 12%, transparent 88%, rgba(0, 0, 0, 0.25) 96.5%, rgba(0, 0, 0, 0.6) 100%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, transparent 5%, transparent 95%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+
+
+
