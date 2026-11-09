@@ -9,14 +9,14 @@ const PROJECTS = [
     subtitle: "Attendance system for SMK Negeri 9 Medan",
     description: "A web attendance system for the Software Engineering department. Students check in by GPS at the event location or by scanning a barcode. Admins publish exhibitions and announcements straight from a dashboard.",
     tags: ["Web App", "GPS", "Barcode Scan", "Admin Dashboard"],
-    url: "https://absensi-rpl-smkn9.duckdns.org",
+    url: "https://my-panji.wuaze.com/",
     linkLabel: "Open website"
   },
   {
     numeral: "II",
     title: "SPP-CENTTT",
     subtitle: "Cashier app for a cafe",
-    description: "A point-of-sale web app for a cafe, built on a custom PHP MVC structure with a MySQL database.",
+    description: "A web-based school tuition (SPP) payment system. Students or parents view their bills and pay online via QRIS, e-wallets, or bank transfer through Midtrans, while admins and staff manage students, classes, invoices, transactions, and reports from a dashboard.",
     tags: ["PHP MVC", "MySQL", "Admin"],
     url: "https://spp-cent.page.gd",
     linkLabel: "Open website"
