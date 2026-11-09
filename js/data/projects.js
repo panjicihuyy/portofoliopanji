@@ -9,7 +9,7 @@ const PROJECTS = [
     subtitle: "Attendance system for SMK Negeri 9 Medan",
     description: "A web attendance system for the Software Engineering department. Students check in by GPS at the event location or by scanning a barcode. Admins publish exhibitions and announcements straight from a dashboard.",
     tags: ["Web App", "GPS", "Barcode Scan", "Admin Dashboard"],
-    url: "https://my-panji.wuaze.com/",
+    url: "https://absen-smkn9medan.wuaze.com/",
     linkLabel: "Open website"
   },
   {
