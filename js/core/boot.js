@@ -104,7 +104,7 @@ const Boot = (() => {
   }
 
   gateRows.forEach((row, i) => {
-    row.addEventListener("mouseenter", () => { if (boot.ready && !boot.started && gateIndex !== i) selectGate(i); });
+    row.addEventListener("mouseenter", () => { if (Platform.canHover && boot.ready && !boot.started && gateIndex !== i) selectGate(i); });
     row.addEventListener("click", (e) => { e.stopPropagation(); selectGate(i, true); toggleGate(i); });
   });
   enterBtn.addEventListener("click", (e) => { e.stopPropagation(); enter(); });

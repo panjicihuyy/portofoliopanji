@@ -52,7 +52,7 @@ const Menu = (() => {
         </svg>`;
 
       const hitbox = item.querySelector(".option-hitbox");
-      hitbox.addEventListener("mouseenter", () => { if (!Pages.current && selected !== index) select(index); });
+      hitbox.addEventListener("mouseenter", () => { if (Platform.canHover && !Pages.current && selected !== index) select(index); });
       hitbox.addEventListener("click", (e) => {
         if (Pages.current) return;
         select(index);

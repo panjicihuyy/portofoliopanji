@@ -41,8 +41,8 @@
   });
 
   // ---- Jalankan ----
-  if (window.innerWidth >= 1024) Boot.run();
+  Boot.run();
 
   // Akses cepat dari Console untuk debugging: P3.Pages.open("system")
-  window.P3 = { Pages, Menu, Music, Settings, Boot };
+  window.P3 = { Pages, Menu, Music, Settings, Boot, Platform };
 })();

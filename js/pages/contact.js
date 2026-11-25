@@ -57,7 +57,7 @@
       listEl.appendChild(row);
     }
     rows = Array.from(listEl.querySelectorAll(".p3r-mail-row"));
-    rows.forEach((row, i) => row.addEventListener("mouseenter", () => { if (!row.classList.contains("p3r-mail-row-empty")) select(i); }));
+    rows.forEach((row, i) => row.addEventListener("mouseenter", () => { if (Platform.canHover && !row.classList.contains("p3r-mail-row-empty")) select(i); }));
   }
 
   function select(i, silent) {

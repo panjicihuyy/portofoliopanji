@@ -93,7 +93,7 @@ function createListController({ container, items, build, onSelect, onConfirm, is
       card.setAttribute("role", "tab");
       card.style.setProperty("--card-idx", idx);
       card.innerHTML = build(item, idx);
-      card.addEventListener("mouseenter", () => { if (isActive() && !Transition.running && selected !== idx) select(idx); });
+      card.addEventListener("mouseenter", () => { if (Platform.canHover && isActive() && !Transition.running && selected !== idx) select(idx); });
       card.addEventListener("click", () => {
         if (!isActive() || Transition.running) return;
         if (selected !== idx) select(idx); else onConfirm(idx);

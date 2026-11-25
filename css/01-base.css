@@ -127,31 +127,5 @@ body.project-screen-active .side-number {
 }
 
 /* --------------------------------------------------------------------------
-   Small Screen Warning (identical to original)
-   -------------------------------------------------------------------------- */
-.mobile-warning {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background-color: var(--color-bg);
-  z-index: 1000;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 2rem;
-  font-family: var(--font-skip);
-  font-weight: bold;
-  font-size: 1.5rem;
-  line-height: 1.6;
-}
-
-@media (max-width: 1023px) {
-  .mobile-warning {
-    display: flex;
-  }
-}
-
-/* --------------------------------------------------------------------------
    Main Screen Container
    -------------------------------------------------------------------------- */

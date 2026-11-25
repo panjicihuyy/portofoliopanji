@@ -13,7 +13,7 @@ const Detail = {
         <h2 class="detail-title">${title}</h2>
         <p class="detail-text">${text}</p>
         ${tags.length ? `<ul class="detail-tags">${tags.map((t) => `<li>${t}</li>`).join("")}</ul>` : ""}
-        ${url ? `<div class="detail-link"><span class="control-key">ENTER</span><span class="control-text">${linkLabel || "Open"}</span></div>` : ""}
+        ${url ? `<div class="detail-link"><span class="control-key">${Platform.keyLabel("ENTER")}</span><span class="control-text">${linkLabel || "Open"}</span></div>` : ""}
       </div>`;
   }
 };

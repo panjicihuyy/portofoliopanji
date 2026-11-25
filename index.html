@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Panji Setiawan | Portfolio</title>
   <meta name="description" content="Portfolio of Panji Setiawan, a frontend design, styled after the Persona 3 Reload pause menu.">
   <meta name="theme-color" content="#001233">
@@ -21,14 +21,9 @@
   <link rel="stylesheet" href="css/10-gate.css">
   <link rel="stylesheet" href="css/11-panels.css">
   <link rel="stylesheet" href="css/12-nowplaying.css">
+  <link rel="stylesheet" href="css/13-mobile.css">
 </head>
 <body>
-  <!-- Peringatan layar kecil -->
-  <div class="mobile-warning">
-    <p>This portfolio is built for a computer screen.</p>
-    <p>Open it on a laptop or desktop (1024 px wide or more).</p>
-  </div>
-
   <!-- Layar loading, lalu layar pilihan suara -->
   <div id="loading-screen" class="p3r-loading-screen" role="progressbar" aria-label="Loading" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
     <!-- Background halaman awal (loading + gate): assets/video/awal-bg.mp4 -->
@@ -460,6 +455,7 @@
   <script src="js/data/contact.js"></script>
   <script src="js/data/music.js"></script>
 
+  <script src="js/core/platform.js"></script>
   <script src="js/core/settings.js"></script>
   <script src="js/core/audio.js"></script>
   <script src="js/core/music.js"></script>

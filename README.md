@@ -9,7 +9,14 @@ HTML, CSS, JavaScript murni. Tanpa npm, tanpa build.
 4. Di layar pertama, pilih Music / Sound effects, lalu tekan **Enter**.
 
 Membuka `index.html` dengan klik dua kali juga bisa. Bedanya hanya efek suara
-memakai cara cadangan yang sedikit lebih lambat. Layar harus selebar 1024 px atau lebih.
+memakai cara cadangan yang sedikit lebih lambat.
+
+## Handphone
+Website sekarang tampil di HP (potret dan lanskap) dan tablet. Cukup sentuh:
+- Layar pilihan suara: sentuh baris Music / Sound effects, lalu sentuh ENTER.
+- Menu: sentuh tulisannya. Project dan Resume: sentuh kartu sekali untuk memilih, sentuh lagi (atau tombol TAP Confirm) untuk membuka link.
+- Tombol Back / Prev / Next di pojok bawah bisa disentuh. Daftar yang panjang bisa digeser.
+- HP memakai video latar menu versi 720p (`bg-intro-mobile.mp4`, `bg-loop-mobile.mp4`) supaya ringan. Layar 1024 px ke atas tetap memakai video asli.
 
 ## Kontrol
 - Panah atas/bawah (atau W/S): pilih. Enter: buka.
@@ -19,7 +26,7 @@ memakai cara cadangan yang sedikit lebih lambat. Layar harus selebar 1024 px ata
 ## Struktur
 ```
 index.html            kerangka halaman saja
-css/                  gaya per bagian (urutan nomor = urutan dimuat)
+css/                  gaya per bagian (urutan nomor = urutan dimuat; 13-mobile.css = tampilan HP)
 js/data/              ISI WEBSITE: edit di sini
 js/core/              mesin: suara, musik, transisi, daftar halaman, boot
 js/pages/             satu file per halaman
