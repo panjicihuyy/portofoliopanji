@@ -9,7 +9,7 @@ const PROFILE = {
   major: "Software Engineering (RPL)",
   photo: "assets/images/profile.jpg",
   bio: [
-   "Hi! I am <strong>Panji Setiawan</strong>, a high school student at <strong>SMK Negeri 9 Medan</strong> majoring in Software Engineering, with a passionate focus on frontend design and web development.",
+   "Hi! I am <strong>Panji Setiawan</strong>, a vocational high school student at <strong>SMK Negeri 9 Medan</strong> majoring in Software Engineering, with a passionate focus on frontend design and web development.",
     "I design clean layouts, strong typography and responsive interfaces. This portfolio is my tribute to the motion and menus of <em>Persona 3 Reload</em>."
   ],
   quote: {
